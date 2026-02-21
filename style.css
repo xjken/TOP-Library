@@ -33,7 +33,6 @@ body{
 }
 .header button{
     padding: 8px 12px ;
-    background-color: white;
     border-radius: 8px;
     border: 1px solid grey;
     box-shadow: 4px 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -42,7 +41,13 @@ body{
 .books-container{
     background-color: #e2e8f0;
     padding: 24px;
+    display: grid;
 }
 .book-card{
     background-color: white;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    width: 300px;
+    height: 200px;
 }
