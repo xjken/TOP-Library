@@ -11,10 +11,10 @@ function Book(title, author, pages, yearPublished,isRead){
     this.pages = pages;
     this.yearPublished = yearPublished;
     this.isRead = isRead;
+}
 
-    this.info = function(){
-        return `${this.title} by ${this.author}, ${this.pages} pages, ${this.isRead? "read" : "not read yet"}`
-    }
+Book.prototype.info = function(){
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.isRead? "read" : "not read yet"}. `
 }
 
 function addBookToLibrary(library, title, author, pages, yearPublished,isRead){
@@ -22,15 +22,16 @@ function addBookToLibrary(library, title, author, pages, yearPublished,isRead){
 
     library.push(newBook);
 }
+
 function showAllBookFromLibrary(library){
     let string = "";
     for(const book of library){
-        string+= book.info;
+        string+= book.info();
     }
     return string;
 } 
 
-// Books
+// Some books to fill the array
 addBookToLibrary(myLibrary,'The Hobbit', 'J.R.R Tolkier', 295, 2003, false);
 addBookToLibrary(myLibrary, "1984", "George Orwell", 328, 1949, true);
 addBookToLibrary(myLibrary, "To Kill a Mockingbird", "Harper Lee", 281, 1960, true);
@@ -42,6 +43,6 @@ addBookToLibrary(myLibrary, "Harry Potter and the Sorcerer's Stone", "J.K. Rowli
 addBookToLibrary(myLibrary, "The Alchemist", "Paulo Coelho", 208, 1988, false);
 addBookToLibrary(myLibrary, "The Little Prince", "Antoine de Saint-Exupéry", 96, 1943, true);
 
-const bookContainer = document.querySelector(".book-container");
 
-bookContainer.textContent=showAllBookFromLibrary(myLibrary);
+const bookContainer = document.querySelector(".book-container");
+// bookContainer.textContent=showAllBookFromLibrary(myLibrary);

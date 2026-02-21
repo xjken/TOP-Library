@@ -1,0 +1,48 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 75px 1fr;
+    height: 100vh;
+}
+
+.header{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); 
+    position: relative; 
+    z-index: 10;
+}
+.header div{
+    display: flex;
+    align-items: center;
+}
+.header p {
+    font-size: 3rem;
+}
+.header img{
+    height: 5rem;
+}
+.header button{
+    padding: 8px 12px ;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid grey;
+    box-shadow: 4px 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.books-container{
+    background-color: #e2e8f0;
+    padding: 24px;
+}
+.book-card{
+    background-color: white;
+}
