@@ -17,6 +17,14 @@ Book.prototype.info = function(){
     return `${this.title} by ${this.author}, ${this.pages} pages, ${this.isRead? "read" : "not read yet"}. `
 }
 
+Book.prototype.toggleRead = function(){
+    if(this.isRead === true){
+        this.isRead = false;
+    } else{
+        this.isRead = true;
+    }
+}
+
 function addBookToLibrary(library, title, author, pages, yearPublished,isRead){
     const newBook = new Book(title, author, pages, yearPublished, isRead);
 
@@ -50,13 +58,14 @@ const booksContainer = document.querySelector(".books-container");
 
 const createBookCard = function(book){
     const bookCard = document.createElement("div");
+    bookCard.dataset.id = book.id;
+    // console.log(bookCard.dataset.id)
     bookCard.classList.add("book-card");
     bookCard.innerHTML = `
         <p class="book-title">${book.title}</p>
-        <p class="book-author">${book.author}</p>
-        <p class="book-year">${book.yearPublished}</p>
-        <p class="book-pages">${book.pages}</p>
-        <button class="book-read">${book.isRead ? "read" : "not read yet"}</button>
+        <p class="book-author-year">${book.author}, ${book.yearPublished}</p>
+        <p class="book-pages">${book.pages} pages</p>
+        <button class="book-read">${book.isRead ? "Finished" : "not read yet"}</button>
     `
     return bookCard;
 }
@@ -67,3 +76,25 @@ const addLibraryToContainer = function(){
     }
 }
 addLibraryToContainer();
+
+const clearContainer =  function(){
+    booksContainer.innerHTML ="";
+}
+
+const readButtons = document.querySelectorAll(".book-read");
+
+// readButtons.forEach(readButton => {
+//     readButton.addEventListener("click", function(){
+//         const card = readButton.closest(".book-card");
+//         const book = myLibrary.find(book => book.id === card.dataset.id);
+//         book.toggleRead();
+//         clearContainer();
+//         addLibraryToContainer();
+//     })
+// });
+
+document.addEventListener('click', e=>{
+    if(e.target.matches(".book-read")){
+        console.log(e.target)
+    }
+})

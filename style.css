@@ -42,6 +42,11 @@ body{
     background-color: #e2e8f0;
     padding: 24px;
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* grid-template-rows: repeat(auto-fit, minmax(200px, auto)); */
+    grid-auto-rows: 250px;
+    gap: 1rem;
+    align-content: start;
 }
 .book-card{
     background-color: white;
@@ -49,5 +54,20 @@ body{
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto;
     width: 300px;
-    height: 200px;
+    height: 250px;
+    padding: 16px;
+}
+.book-card .book-title{
+    font-size: 1.5rem;
+    font-weight: 550;
+}
+.book-card .book-author-year{
+    font-size: 1rem;
+}
+.book-card .book-pages{
+    font-size: 1rem;
+    color: #73757c;
+}
+.book-card button{
+    background-color: #73757c;    
 }
