@@ -63,7 +63,10 @@ const createBookCard = function(book){
         <p class="book-title">${book.title}</p>
         <p class="book-author-year">${book.author}, ${book.yearPublished}</p>
         <p class="book-pages">${book.pages} pages</p>
-        <button class="book-read">${book.isRead ? "Finished" : "not read yet"}</button>
+        <div class="book-card-btn-row">
+            <button class="book-read">${book.isRead ? "Finished" : "not read yet"}</button>
+            <button class="book-delete"><img src="icons/delete-outline.svg" alt=""></button>
+        </div>
     `
     return bookCard;
 }
