@@ -98,11 +98,20 @@ const readButtons = document.querySelectorAll(".book-read");
 
 //USE EVENT DELEGATION INSTEAD
 document.addEventListener('click', e=>{
+    //handle read button
     if(e.target.matches(".book-read")){
         const card = e.target.closest(".book-card");
         const book = myLibrary.find(book => book.id === card.dataset.id);
         book.toggleRead();
         reloadContainer()
+    }
+    //handle remove button
+    if(e.target.matches(".book-delete")){
+        const bookCard = e.target.closest(".book-card");
+        const bookIndex = myLibrary.findIndex(book=>book.id === bookCard.dataset.id);
+        console.log(bookIndex);
+        myLibrary.splice(bookIndex, 1)
+        reloadContainer();
     }
 })
 

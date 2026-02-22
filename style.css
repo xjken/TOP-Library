@@ -78,6 +78,7 @@ body{
 }
 .book-card button img{
     height: 100%;
+    pointer-events: none;
 }
 
 
