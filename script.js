@@ -1,4 +1,17 @@
 const myLibrary = [];
+// Some books to fill the array
+{
+    addBookToLibrary(myLibrary,'The Hobbit', 'J.R.R Tolkien', 295, 2003, false);
+    addBookToLibrary(myLibrary, "1984", "George Orwell", 328, 1949, true);
+    addBookToLibrary(myLibrary, "To Kill a Mockingbird", "Harper Lee", 281, 1960, true);
+    addBookToLibrary(myLibrary, "Pride and Prejudice", "Jane Austen", 432, 1813, false);
+    addBookToLibrary(myLibrary, "The Great Gatsby", "F. Scott Fitzgerald", 180, 1925, true);
+    addBookToLibrary(myLibrary, "Dune", "Frank Herbert", 412, 1965, false);
+    addBookToLibrary(myLibrary, "The Catcher in the Rye", "J.D. Salinger", 214, 1951, false);
+    addBookToLibrary(myLibrary, "Harry Potter and the Sorcerer's Stone", "J.K. Rowling", 309, 1997, true);
+    addBookToLibrary(myLibrary, "The Alchemist", "Paulo Coelho", 208, 1988, false);
+    addBookToLibrary(myLibrary, "The Little Prince", "Antoine de Saint-Exupéry", 96, 1943, true);
+}
 
 function Book(title, author, pages, yearPublished,isRead){
     if(!new.target){
@@ -39,21 +52,6 @@ function showAllBookFromLibrary(library){
     return string;
 } 
 
-// Some books to fill the array
-{
-    addBookToLibrary(myLibrary,'The Hobbit', 'J.R.R Tolkien', 295, 2003, false);
-    addBookToLibrary(myLibrary, "1984", "George Orwell", 328, 1949, true);
-    addBookToLibrary(myLibrary, "To Kill a Mockingbird", "Harper Lee", 281, 1960, true);
-    addBookToLibrary(myLibrary, "Pride and Prejudice", "Jane Austen", 432, 1813, false);
-    addBookToLibrary(myLibrary, "The Great Gatsby", "F. Scott Fitzgerald", 180, 1925, true);
-    addBookToLibrary(myLibrary, "Dune", "Frank Herbert", 412, 1965, false);
-    addBookToLibrary(myLibrary, "The Catcher in the Rye", "J.D. Salinger", 214, 1951, false);
-    addBookToLibrary(myLibrary, "Harry Potter and the Sorcerer's Stone", "J.K. Rowling", 309, 1997, true);
-    addBookToLibrary(myLibrary, "The Alchemist", "Paulo Coelho", 208, 1988, false);
-    addBookToLibrary(myLibrary, "The Little Prince", "Antoine de Saint-Exupéry", 96, 1943, true);
-}
-
-
 const booksContainer = document.querySelector(".books-container");
 
 const createBookCard = function(book){
@@ -77,12 +75,14 @@ const addLibraryToContainer = function(){
 }
 addLibraryToContainer();
 
-const clearContainer =  function(){
+const reloadContainer =  function(){
     booksContainer.innerHTML ="";
+    addLibraryToContainer();
 }
 
 const readButtons = document.querySelectorAll(".book-read");
 
+// THIS EVENT LISTENER DOES NOT WORK AFTER FIRST CLICK
 // readButtons.forEach(readButton => {
 //     readButton.addEventListener("click", function(){
 //         const card = readButton.closest(".book-card");
@@ -93,8 +93,40 @@ const readButtons = document.querySelectorAll(".book-read");
 //     })
 // });
 
+//USE EVENT DELEGATION INSTEAD
 document.addEventListener('click', e=>{
     if(e.target.matches(".book-read")){
-        console.log(e.target)
+        const card = e.target.closest(".book-card");
+        const book = myLibrary.find(book => book.id === card.dataset.id);
+        book.toggleRead();
+        reloadContainer()
     }
+})
+
+const addBookButton = document.querySelector(".add-book")
+const addBookModal = document.querySelector(".add-book-modal")
+const closeBookModal = document.querySelector('.close-book-modal')
+const submitBookButton = document.querySelector(".submit-book-btn")
+const form = document.querySelector('.modal-content')
+addBookButton.addEventListener('click', (e)=>{
+    addBookModal.showModal();
+})
+closeBookModal.addEventListener('click', (e)=>{
+    addBookModal.close();
+})
+submitBookButton.addEventListener('click',(e)=>{
+    e.preventDefault(); 
+
+    const data = new FormData(form);
+
+    addBookToLibrary(myLibrary,
+        data.get("book-title"),
+        data.get("book-author"),
+        Number(data.get("book-pages")),
+        Number(data.get("book-year")),
+        data.get("book-read")=== "on"
+    );
+
+    modal.close();
+    reloadContainer();
 })
